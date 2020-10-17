@@ -1,0 +1,5 @@
+
+.NavigationButton:hover{
+-fx-background-color : #000000;
+-fx-effect: dropshadow( one-pass-box ,  #FFFFFF , 20 , 0.0 , 3 , 1 );
+}
