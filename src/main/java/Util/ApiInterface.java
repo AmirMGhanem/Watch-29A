@@ -1,5 +1,6 @@
 package Util;
 
+import TMDB_APi.MovieVideos;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -12,6 +13,16 @@ public interface ApiInterface {
             @Path("category") String category,
             @Query("api_key") String apiKey,
             @Query("language") String language,
-            @Query("Page") int page
+            @Query("page") int page
+
     );
+
+
+    @GET("/3/movie/{id}")
+    Call<MovieVideos> listOfVideos (
+            @Path("id") int id,
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("append_to_response") String appendToResponse
+            );
 }
