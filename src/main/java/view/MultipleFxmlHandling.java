@@ -1,5 +1,6 @@
 package view;
 
+import Util.retrofitter;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ public class MultipleFxmlHandling extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
+        retrofitter rf = new retrofitter();
         primaryStage.show();
 
     }
@@ -32,5 +34,7 @@ public class MultipleFxmlHandling extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+
     }
 }
