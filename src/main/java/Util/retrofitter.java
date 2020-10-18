@@ -1,8 +1,6 @@
 package Util;
 
-
 import TMDB_APi.MovieVideos;
-import TMDB_APi.Result;
 import TMDB_APi.Videos;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class retrofitter {
     public static String BASE_URL = "https://api.themoviedb.org";
     public static int PAGES = 1;
@@ -20,11 +19,12 @@ public class retrofitter {
     public static String CATEGORY = "popular";
     //----------------------------------------
     public static int ID = 666;
-    public static String appendToResponse="videos";
+    public static String appendToResponse = "videos";
 
-
-
+    static ApiInterface myApi;
     public static List<String> moviesidsStatic;
+    public static String youtubeKey;
+
 
 
     public retrofitter() {
@@ -32,52 +32,32 @@ public class retrofitter {
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+        myApi = retrofit.create(ApiInterface.class);
+        FindMovieByCategory(CATEGORY);
+    }
 
-        ApiInterface myApi = retrofit.create(ApiInterface.class);
-        setPAGES(8);
-        Call<MovieResults> call = myApi.listOfMovies(CATEGORY,API_KEY,LANGUAGE,PAGES);
+    public static void FindMovieByCategory(String category) {
+        if (!category.equals(""))
+            CATEGORY = category;
+        Call<MovieResults> call = myApi.listOfMovies(CATEGORY, API_KEY, LANGUAGE, PAGES);
         call.enqueue(new Callback<MovieResults>() {
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
                 MovieResults results = response.body();
+                assert results != null;
                 List<MovieResults.Result> listOfMovies = results.getResults();
                 MovieResults.Result firstMovie = listOfMovies.get(0);
                 System.out.println();
-                System.out.println("First movie of the popular category page 1 is found. the id is "+ firstMovie.getId() +
+                System.out.println("First movie of the popular category page 1 is found. the id is " + firstMovie.getId() +
                         " and it's title is " + firstMovie.getTitle());
                 System.out.println("Let's find the trailer video key for streaming it.");
                 setID(firstMovie.getId());
 
-
                 List<String> moviesids = new ArrayList<>();
-                for(MovieResults.Result r : listOfMovies) {
+                for (MovieResults.Result r : listOfMovies) {
                     moviesids.add(Integer.toString(r.getId()));
                 }
-
                 setMoviesids(moviesids);
-
-
-                //Calling the videos Path for getting the key.
-                Call<MovieVideos> callMovie = myApi.listOfVideos(ID,API_KEY,LANGUAGE,appendToResponse);
-                callMovie.enqueue(new Callback<MovieVideos>() {
-                    @Override
-                    public void onResponse(Call<MovieVideos> call, Response<MovieVideos> response) {
-                        MovieVideos listOfVideos = response.body();
-                        Videos video = listOfVideos.getVideos();
-                        System.out.println("Movie ID -> " + ID + " is found, the video key is - \n");
-                        System.out.println(video.getResults().get(0).getKey());
-
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<MovieVideos> call, Throwable throwable) {
-
-                    }
-                });
-
-
             }
 
             @Override
@@ -85,8 +65,41 @@ public class retrofitter {
                 System.out.println("Failed");
             }
         });
+    }
 
 
+    public static void FindMovieByID(int id) {
+
+        //Calling the videos Path for getting the key.
+        Call<MovieVideos> callMovie = myApi.listOfVideos(id, API_KEY, LANGUAGE, appendToResponse);
+        callMovie.enqueue(new Callback<MovieVideos>() {
+            @Override
+            public void onResponse(Call<MovieVideos> call, Response<MovieVideos> response) {
+                MovieVideos listOfVideos = response.body();
+                assert listOfVideos != null;
+                Videos video = listOfVideos.getVideos();
+                System.out.println("Movie ID -> " + id + " is found, the video key is -> " + video.getResults().get(0).getKey());
+                String key = video.getResults().get(0).getKey();
+                setYoutubeKey(key);
+            }
+
+            @Override
+            public void onFailure(Call<MovieVideos> call, Throwable throwable) {
+                System.out.println("Failure!!!!!!");
+
+            }
+        });
+
+
+    }
+
+
+    public static String getYoutubeKey() {
+        return youtubeKey;
+    }
+
+    public static void setYoutubeKey(String key) {
+        retrofitter.youtubeKey = key;
     }
 
     public static List<String> getMoviesids() {

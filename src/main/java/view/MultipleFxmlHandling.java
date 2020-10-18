@@ -2,9 +2,12 @@ package view;
 
 import Util.retrofitter;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -27,9 +30,14 @@ public class MultipleFxmlHandling extends Application {
 
         primaryStage.setScene(scene);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
-
         primaryStage.show();
-
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
 
