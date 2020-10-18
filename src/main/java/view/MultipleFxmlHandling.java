@@ -24,9 +24,10 @@ public class MultipleFxmlHandling extends Application {
         setPrimaryStage(stage);
         Parent root = load(getClass().getResource("/FxmlFiles/SignIn.fxml"));
         Scene scene = new Scene(root);
+
         primaryStage.setScene(scene);
         //primaryStage.initStyle(StageStyle.UNDECORATED);
-        retrofitter rf = new retrofitter();
+
         primaryStage.show();
 
     }

@@ -28,7 +28,6 @@ public class SignIn implements Initializable {
 
     @FXML
     void OnLogin(ActionEvent event) throws IOException {
-        System.out.println("Medicine Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Main");
         Stage stage = new Stage();

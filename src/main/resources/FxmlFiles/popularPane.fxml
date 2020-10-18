@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.popular">
+   <children>
+      <Label layoutX="347.0" layoutY="41.0" text="Popular">
+         <font>
+            <Font size="42.0" />
+         </font>
+      </Label>
+      <ListView fx:id="listview" layoutX="655.0" layoutY="111.0" prefHeight="593.0" prefWidth="143.0" />
+      <Label layoutX="697.0" layoutY="77.0" text="Movie Title" />
+   </children>
+</Pane>

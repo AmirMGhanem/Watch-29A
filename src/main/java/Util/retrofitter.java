@@ -2,6 +2,7 @@ package Util;
 
 
 import TMDB_APi.MovieVideos;
+import TMDB_APi.Result;
 import TMDB_APi.Videos;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -9,6 +10,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 public class retrofitter {
     public static String BASE_URL = "https://api.themoviedb.org";
@@ -19,6 +21,11 @@ public class retrofitter {
     //----------------------------------------
     public static int ID = 666;
     public static String appendToResponse="videos";
+
+
+
+    public static List<String> moviesidsStatic;
+
 
     public retrofitter() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -33,13 +40,22 @@ public class retrofitter {
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
                 MovieResults results = response.body();
-             List<MovieResults.Result> listOfMovies = results.getResults();
+                List<MovieResults.Result> listOfMovies = results.getResults();
                 MovieResults.Result firstMovie = listOfMovies.get(0);
                 System.out.println();
                 System.out.println("First movie of the popular category page 1 is found. the id is "+ firstMovie.getId() +
                         " and it's title is " + firstMovie.getTitle());
                 System.out.println("Let's find the trailer video key for streaming it.");
                 setID(firstMovie.getId());
+
+
+                List<String> moviesids = new ArrayList<>();
+                for(MovieResults.Result r : listOfMovies) {
+                    moviesids.add(Integer.toString(r.getId()));
+                }
+
+                setMoviesids(moviesids);
+
 
                 //Calling the videos Path for getting the key.
                 Call<MovieVideos> callMovie = myApi.listOfVideos(ID,API_KEY,LANGUAGE,appendToResponse);
@@ -50,6 +66,9 @@ public class retrofitter {
                         Videos video = listOfVideos.getVideos();
                         System.out.println("Movie ID -> " + ID + " is found, the video key is - \n");
                         System.out.println(video.getResults().get(0).getKey());
+
+
+
                     }
 
                     @Override
@@ -68,6 +87,14 @@ public class retrofitter {
         });
 
 
+    }
+
+    public static List<String> getMoviesids() {
+        return moviesidsStatic;
+    }
+
+    public static void setMoviesids(List<String> moviesids) {
+        retrofitter.moviesidsStatic = moviesids;
     }
 
     public static int getPAGES() {

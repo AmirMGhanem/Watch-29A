@@ -3,120 +3,63 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="Parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" stylesheets="@../Css/StyleSheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Main">
    <children>
-      <BorderPane prefHeight="723.0" prefWidth="1081.0">
+      <BorderPane fx:id="BorderLayoutPane" prefHeight="723.0" prefWidth="1081.0">
          <left>
-            <Pane prefHeight="723.0" prefWidth="249.0" style="-fx-border-color: #000000; -fx-background-color: #0A0020;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="544.0" prefWidth="242.0" style="-fx-background-color: #0A0020;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="1.0" layoutY="-1.0" prefHeight="544.0" prefWidth="242.0">
+                  <Pane prefHeight="139.0" prefWidth="255.0">
                      <children>
-                        <Pane prefHeight="139.0" prefWidth="255.0">
-                           <children>
-                              <Label layoutX="69.0" layoutY="8.0" text="Watch 29A" textFill="#9c0707">
-                                 <font>
-                                    <Font name="Chiller" size="32.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="76.0" layoutY="72.0" text="20:53:00" textFill="#9c0707">
-                                 <font>
-                                    <Font name="Chiller" size="30.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                        <HBox prefHeight="35.0" prefWidth="234.0" styleClass="NavigationButton">
-                           <children>
-                              <Label prefHeight="34.0" prefWidth="159.0" text="Popular">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="33.0" prefWidth="255.0" styleClass="NavigationButton">
-                           <children>
-                              <Label prefHeight="29.0" prefWidth="159.0" text="Top Rated">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="33.0" prefWidth="255.0" styleClass="NavigationButton">
-                           <children>
-                              <Label prefHeight="29.0" prefWidth="159.0" text="Up Coming">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="33.0" prefWidth="255.0" styleClass="NavigationButton">
-                           <children>
-                              <Label prefHeight="29.0" prefWidth="159.0" text="About">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
+                        <Label layoutX="69.0" layoutY="8.0" text="Watch 29A" textFill="#9c0707">
+                           <font>
+                              <Font name="Chiller" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="76.0" layoutY="72.0" text="20:53:00" textFill="#9c0707">
+                           <font>
+                              <Font name="Chiller" size="30.0" />
+                           </font>
+                        </Label>
                      </children>
-                  </VBox>
+                  </Pane>
+                  <HBox fx:id="Btnpopular" onMouseClicked="#onClickBtnpopular" prefHeight="35.0" prefWidth="234.0" styleClass="NavigationButton">
+                     <children>
+                        <Label prefHeight="34.0" prefWidth="159.0" text="Popular">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="BtnTopRated" onMouseClicked="#onClickBtnTopRated" prefHeight="33.0" prefWidth="255.0" styleClass="NavigationButton">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="159.0" text="Top Rated">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="UpComing" onMouseClicked="#onClickUpComing" prefHeight="33.0" prefWidth="255.0" styleClass="NavigationButton">
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="159.0" text="Up Coming">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
-            </Pane>
+            </VBox>
          </left>
          <center>
-            <GridPane fx:id="GridPane" gridLinesVisible="true" prefHeight="721.0" prefWidth="818.0" BorderPane.alignment="CENTER">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.39996337890625" minWidth="10.0" prefWidth="132.93334350585937" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.1333374023437" minWidth="0.0" prefWidth="138.333349609375" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.1333374023437" minWidth="0.0" prefWidth="147.6665771484375" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.1333374023437" minWidth="10.0" prefWidth="136.79997558593755" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.1333374023437" minWidth="10.0" prefWidth="141.60000000000002" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="670.1333374023437" minWidth="10.0" prefWidth="134.39999999999998" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="325.6666320800781" minHeight="10.0" prefHeight="186.86663208007812" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="443.0000175476074" minHeight="10.0" prefHeight="190.33336791992187" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="333.06664428710945" minHeight="10.0" prefHeight="175.73327636718756" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="325.466650390625" minHeight="10.0" prefHeight="174.66672363281248" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-               </children>
-            </GridPane>
+            <Pane fx:id="pane" prefHeight="718.0" prefWidth="837.0" style="-fx-border-color: #000000;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
