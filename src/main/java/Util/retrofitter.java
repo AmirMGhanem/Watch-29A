@@ -18,13 +18,14 @@ public class retrofitter {
     public static String LANGUAGE = "en-US";
     public static String CATEGORY = "popular";
     //----------------------------------------
-    public static int ID = 666;
+    public static int ID;
     public static String appendToResponse = "videos";
 
     static ApiInterface myApi;
     public static List<String> moviesidsStatic;
-    public static String youtubeKey;
+    public static String youtubeKey, imagepath;
 
+    public static String Header, Overview;
 
 
     public retrofitter() {
@@ -33,7 +34,7 @@ public class retrofitter {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         myApi = retrofit.create(ApiInterface.class);
-        FindMovieByCategory(CATEGORY);
+
     }
 
     public static void FindMovieByCategory(String category) {
@@ -45,10 +46,11 @@ public class retrofitter {
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
                 MovieResults results = response.body();
                 assert results != null;
+
                 List<MovieResults.Result> listOfMovies = results.getResults();
                 MovieResults.Result firstMovie = listOfMovies.get(0);
                 System.out.println();
-                System.out.println("First movie of the popular category page 1 is found. the id is " + firstMovie.getId() +
+                System.out.println("First movie of the popular category page " + PAGES + " is found. the id is " + firstMovie.getId() +
                         " and it's title is " + firstMovie.getTitle());
                 System.out.println("Let's find the trailer video key for streaming it.");
                 setID(firstMovie.getId());
@@ -57,7 +59,8 @@ public class retrofitter {
                 for (MovieResults.Result r : listOfMovies) {
                     moviesids.add(Integer.toString(r.getId()));
                 }
-                setMoviesids(moviesids);
+                    setMoviesids(moviesids);
+
             }
 
             @Override
@@ -69,18 +72,22 @@ public class retrofitter {
 
 
     public static void FindMovieByID(int id) {
-
+        setID(id);
         //Calling the videos Path for getting the key.
-        Call<MovieVideos> callMovie = myApi.listOfVideos(id, API_KEY, LANGUAGE, appendToResponse);
+        Call<MovieVideos> callMovie = myApi.listOfVideos(ID, API_KEY, LANGUAGE, appendToResponse);
         callMovie.enqueue(new Callback<MovieVideos>() {
             @Override
             public void onResponse(Call<MovieVideos> call, Response<MovieVideos> response) {
                 MovieVideos listOfVideos = response.body();
+                setHeader(listOfVideos.getTitle());
+                setOverview(listOfVideos.getOverview());
+                setImagepath(listOfVideos.getPosterPath());
                 assert listOfVideos != null;
                 Videos video = listOfVideos.getVideos();
-                System.out.println("Movie ID -> " + id + " is found, the video key is -> " + video.getResults().get(0).getKey());
-                String key = video.getResults().get(0).getKey();
-                setYoutubeKey(key);
+                //System.out.println("Movie ID -> " + ID + " is found, the video key is ->" + video.getResults().get(0).getKey());
+                setYoutubeKey(video.getResults().get(0).getKey());
+                System.out.println("Youtube KEY - " + getYoutubeKey());
+
             }
 
             @Override
@@ -89,10 +96,32 @@ public class retrofitter {
 
             }
         });
-
-
     }
 
+
+    public static String getImagepath() {
+        return imagepath;
+    }
+
+    public static void setImagepath(String imagepath) {
+        retrofitter.imagepath = imagepath;
+    }
+
+    public static String getHeader() {
+        return Header;
+    }
+
+    public static void setHeader(String header) {
+        Header = header;
+    }
+
+    public static String getOverview() {
+        return Overview;
+    }
+
+    public static void setOverview(String overview) {
+        Overview = overview;
+    }
 
     public static String getYoutubeKey() {
         return youtubeKey;
@@ -105,6 +134,8 @@ public class retrofitter {
     public static List<String> getMoviesids() {
         return moviesidsStatic;
     }
+
+
 
     public static void setMoviesids(List<String> moviesids) {
         retrofitter.moviesidsStatic = moviesids;
