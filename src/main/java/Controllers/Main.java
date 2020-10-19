@@ -33,6 +33,11 @@ public class Main implements Initializable {
     @FXML
     private HBox UpComing;
 
+
+    retrofitter rf = new retrofitter();
+
+
+
     @FXML
     void onClickBtnTopRated(MouseEvent event) {
 
@@ -53,7 +58,7 @@ public class Main implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        retrofitter rf = new retrofitter();
+
 
 //        WebView webView = new WebView();
 //        WebEngine webEngine = webView.getEngine();
